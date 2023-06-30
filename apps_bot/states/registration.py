@@ -4,4 +4,4 @@ class RegSG(StatesGroup):
     first_name = State()
     last_name = State()
     middle_name = State()
-
+    department = State()

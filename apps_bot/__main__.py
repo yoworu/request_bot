@@ -16,7 +16,7 @@ from db.setup import create_engine
 
 
 async def main():
-    redis = Redis(db=1)
+    redis = Redis(db=3)
     dp = Dispatcher()
     bot = Bot(bot_config.bot_token)
     dp.include_routers(reg_router, question_router)
@@ -46,3 +46,4 @@ def cli():
 
 if __name__ == '__main__':
     cli()
+    

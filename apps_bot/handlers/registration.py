@@ -34,23 +34,33 @@ async def last_name_handler(message: Message, state: FSMContext):
     
 
 @reg_router.message(IsValidName(), RegSG.middle_name)
-async def middle_name_handler(message: Message,
-                              state: FSMContext,
-                              async_session: async_sessionmaker[AsyncSession]):
-    await message.answer('Done')
-    state_data = await state.get_data()
+async def middle_name_handler(message: Message, state: FSMContext):
+    await message.answer('Send department')
+    await state.update_data(middle_name=message.text)
+    await state.set_state(RegSG.department)
     
+
+@reg_router.message(RegSG.department)
+async def department_handler(message: Message,
+                             state: FSMContext,
+                             async_session: async_sessionmaker[AsyncSession]):
+    state_data = await state.get_data()
+
     first_name = state_data['first_name']
     last_name = state_data['last_name']
-    middle_name = message.text
+    middle_name = state_data['middle_name']
+    department = message.text
     
     await add_user(async_session,
                    message.from_user.id,
                    first_name,
                    last_name,
-                   middle_name)
+                   middle_name,
+                   department)    
     
     
     
+    await state.clear()
+    await message.answer('Done, /question')
     
     
