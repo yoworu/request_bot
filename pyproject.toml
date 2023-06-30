@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "apps-bot"
+version = "0.1.0"
+description = ""
+authors = ["yoworu <115416023+yoworu@users.noreply.github.com>"]
+readme = "README.md"
+packages = [{include = "apps_bot"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+aiogram = "3.0.0b7"
+sqlalchemy = "^2.0.17"
+asyncpg = "^0.27.0"
+redis = {extras = ["hiredis"], version = "^4.6.0"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
